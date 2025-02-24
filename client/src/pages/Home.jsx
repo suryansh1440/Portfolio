@@ -6,6 +6,7 @@ import DecryptedText from '../ReactsBits/DecryptedText';
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
 import MainPhoto from '../assets/MainPhoto.jpg';
+import animationLogo from '../assets/animationLogo.png';
 
 const Home = () => {
   const [showAnimation, setShowAnimation] = useState(false);
@@ -23,7 +24,7 @@ const Home = () => {
 
       <Header />
 
-      <div className='flex flex-col bg-black min-h-[100vh] border w-full overflow-hidden relative sticky top-0'>
+      <div id="home" className='flex flex-col bg-black min-h-[100vh] border w-full overflow-hidden relative '>
         <Waves
           lineColor="#fff"
           backgroundColor="transparent"
@@ -45,7 +46,7 @@ const Home = () => {
 
             <motion.div
               className='flex flex-row lg:text-8xl text-4xl mt-7 font-bold text-white'
-              initial={{ x: -100, opacity: 0 }}
+              initial={{ x: 0, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 2 }}
               style={{ fontFamily: 'Space Mono, monospace' }}
@@ -53,7 +54,7 @@ const Home = () => {
               <DecryptedText
                 text="Suryansh Singh"
                 animateOn="view"
-                speed={300}
+                speed={600}
                 revealDirection="start"
               />
             </motion.div>
@@ -105,8 +106,35 @@ const Home = () => {
           </motion.div>
         </div>
       </div>
-      <div className='h-[100vh] w-full bg-black sticky top-0 z-10 '>
-        {/* Additional content */}
+
+
+      <div id="about" className='about h-[100vh] w-full bg-black z-10 overflow-hidden'>
+        <div
+          className='flex items-center font-bold whitespace-nowrap p-8'
+          style={{
+            animation: 'marquee 20s linear infinite',
+          }}
+        >
+          {[...Array(8)].map((_, i) => (
+            <React.Fragment key={i}>
+              <p className='mr-5 text-4xl text-white'>WELCOME TO MY PORTFOLIO </p>
+              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
+              <p className='mr-5 text-4xl text-white'>LET ME INTRODUCE MYSELF</p>
+              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
+            </React.Fragment>
+          ))}
+        </div>
+
+            <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(0%); }
+        }
+      `}</style>
+
+
+
+
       </div>
     </>
   );
