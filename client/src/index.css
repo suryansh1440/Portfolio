@@ -51,10 +51,10 @@ html {
 }
 
 /* Focus outline */
-*:focus {
+/* *:focus {
   outline: 2px solid #00B8D9;
   outline-offset: 2px;
-}
+} */
 
 /* Transitions */
 .transition-all {

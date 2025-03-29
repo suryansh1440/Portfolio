@@ -168,9 +168,9 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.a
+        <a
           href="#about"
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group outline-none focus:outline-none focus:ring-0 border-0"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group z-60"
           style={{ opacity }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -186,10 +186,7 @@ const Home = () => {
               className="w-1.5 h-1.5 bg-white/50 rounded-full mx-auto group-hover:bg-white/70 transition-colors"
             />
           </motion.div>
-          <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-white/50 text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            Scroll to About
-          </span>
-        </motion.a>
+        </a>
       </div>
 
      <WelcomeBanner title="WELCOME TO MY PORTFOLIO" subtitle="LET ME INTRODUCE MYSELF"/>

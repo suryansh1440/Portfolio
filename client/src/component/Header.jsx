@@ -65,16 +65,16 @@ const Header = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 ">
             {navItems.map((item) => (
               <motion.div
                 key={item.name}
-                className="relative group"
+                className="relative group "
                 whileHover={{ scale: 1.1 }}
               >
                 <a
                   href={item.path}
-                  className="px-4 py-2 font-medium text-gray-100 hover:text-white transition-colors duration-300 relative"
+                  className="px-4 py-2 font-medium text-gray-100 hover:text-white duration-300 relative focus:outline-[#00B8D9] focus:outline-2 focus:outline-offset-2 transition-all rounded-xl"
                 >
                   {item.name}
                   <motion.div
