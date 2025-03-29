@@ -1,17 +1,27 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   
   const navItems = [
     { name: 'Home', path: '#home' },
     { name: 'About', path: '#about' },
-    { name: 'Work', path: '/' },
-    { name: 'Contact', path: '/' },
+    { name: 'Projects', path: '#projects' },
+    { name: 'Contact', path: '#contact' },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const mobileMenuVariants = {
     open: { 
@@ -31,52 +41,65 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 120 }}
-      className="fixed top-0 w-full bg-gray-900/5 backdrop-blur-xs z-50"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-black/80 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
+      }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Logo on Left */}
-        <div
-          className="flex items-center gap-2"
-        >
-          <span className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent">
-            <img src={logo} alt="" className='lg:w-[25%] w-[45%]'/>
-          </span>
-        </div>
+      <nav className="container mx-auto px-20 py-0">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <motion.div
+            className="flex items-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <a href="#home" className="flex items-center">
+              <img 
+                src={logo} 
+                alt="Logo" 
+                className="w-20 h-20 object-contain"
+              />
+            </a>
+          </motion.div>
 
-        {/* Desktop Navigation - Right Aligned */}
-        <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <motion.div
-              key={item.name}
-              className="relative group"
-              whileHover={{ scale: 1.1 }}
-            >
-              <a
-                href={item.path}
-                className="px-3 py-2 font-bold  text-gray-100 hover:text-white transition-colors duration-300 relative"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <motion.div
+                key={item.name}
+                className="relative group"
+                whileHover={{ scale: 1.1 }}
               >
-                {item.name}
-                <motion.div
-                  className="absolute  bottom-0 left-0 w-full h-0.5 bg-blue-400 origin-left scale-x-0"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ 
-                    scaleX: 1,
-                    transition: { duration: 0.3, ease: "easeOut" }
-                  }}
-                />
-              </a>
-            </motion.div>
-          ))}
-        </div>
+                <a
+                  href={item.path}
+                  className="px-4 py-2 font-medium text-gray-100 hover:text-white transition-colors duration-300 relative"
+                >
+                  {item.name}
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 origin-left scale-x-0"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ 
+                      scaleX: 1,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                  />
+                </a>
+              </motion.div>
+            ))}
+          </div>
 
-        {/* Mobile Menu Button - Right Aligned */}
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          className="md:hidden p-2 text-gray-100 hover:text-white"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-        </motion.button>
+          {/* Mobile Menu Button */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            className="md:hidden p-2 text-gray-100 hover:text-white rounded-lg hover:bg-gray-800/50 transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </motion.button>
+        </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -86,23 +109,25 @@ const Header = () => {
               animate="open"
               exit="closed"
               variants={mobileMenuVariants}
-              className="md:hidden absolute top-16 left-0 w-full bg-black/85 backdrop-blur-sm border-b border-gray-700/50"
+              className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-gray-800"
             >
-              <div className="container mx-auto px-4 py-4">
-                <div className="flex flex-col gap-4">
+              <div className="container mx-auto px-6 py-4">
+                <div className="flex flex-col gap-2">
                   {navItems.map((item) => (
                     <motion.a
                       key={item.name}
                       href={item.path}
-                      className="text-gray-100 hover:text-white px-3 py-2 border-l-4 border-transparent hover:border-blue-400 transition-all group"
+                      className="text-gray-100 hover:text-white px-4 py-3 rounded-lg hover:bg-gray-800/50 transition-all group"
                       whileHover={{ 
                         x: 10,
                         transition: { type: 'spring', stiffness: 300 }
                       }}
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item.name}
-                      <div className="w-0 h-0.5 bg-blue-400 mt-1 group-hover:w-full transition-all duration-300" />
+                      <div className="flex items-center gap-2">
+                        <span className="w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {item.name}
+                      </div>
                     </motion.a>
                   ))}
                 </div>

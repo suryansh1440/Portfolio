@@ -1,91 +1,113 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiInstagram, FiFacebook, FiLinkedin } from 'react-icons/fi';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   const socialLinks = [
-    {
-      icon: <FiInstagram />,
-      url: 'https://instagram.com',
-      color: 'hover:text-pink-500',
-    },
-    {
-      icon: <FiFacebook />,
-      url: 'https://facebook.com',
-      color: 'hover:text-blue-500',
-    },
-    {
-      icon: <FiLinkedin />,
-      url: 'https://linkedin.com',
-      color: 'hover:text-blue-400',
-    },
+    { icon: <FaGithub />, url: 'https://github.com/yourusername', label: 'GitHub', color: 'hover:text-gray-400' },
+    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/yourusername', label: 'LinkedIn', color: 'hover:text-blue-500' },
+    { icon: <FaTwitter />, url: 'https://twitter.com/yourusername', label: 'Twitter', color: 'hover:text-blue-400' },
+    { icon: <FaEnvelope />, url: 'mailto:your.email@example.com', label: 'Email', color: 'hover:text-red-400' }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 15, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: 'spring', stiffness: 120 },
-    },
-  };
+  const footerLinks = [
+    { name: 'Home', path: '#home' },
+    { name: 'About', path: '#about' },
+    { name: 'Projects', path: '#projects' },
+    { name: 'Contact', path: '#contact' }
+  ];
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-6 border-t border-gray-700">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="container mx-auto px-4"
-      >
-        <div className="flex flex-col items-center justify-center">
+    <footer className="bg-black border-t border-gray-800">
+      <div className="container mx-auto px-6 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Brand Section */}
           <motion.div
-            variants={containerVariants}
-            className="flex space-x-5 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4"
           >
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={itemVariants}
-                whileHover={{ scale: 1.15, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                className={`text-2xl transition-all duration-300 ${link.color} cursor-pointer hover:drop-shadow-lg`}
-              >
-                {link.icon}
-              </motion.a>
-            ))}
+            <h3 className="text-xl font-bold text-white">Suryansh Singh</h3>
+            <p className="text-gray-400">
+              Full Stack Developer passionate about creating beautiful and functional web applications.
+            </p>
           </motion.div>
 
+          {/* Quick Links */}
           <motion.div
-            variants={itemVariants}
-            className="text-center text-sm text-gray-300"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-4"
           >
-            <p className="mb-1">
-              © {new Date().getFullYear()} Suryaa. All rights reserved.
-            </p>
-            <div className="flex items-center justify-center space-x-2">
-              <span className="h-px w-8 bg-gray-500"></span>
-              <span>Made with ❤️</span>
-              <span className="h-px w-8 bg-gray-500"></span>
+            <h3 className="text-xl font-bold text-white">Quick Links</h3>
+            <ul className="space-y-2">
+              {footerLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.path}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-white">Connect</h3>
+            <div className="flex flex-wrap gap-4">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`text-gray-400 ${link.color} transition-colors p-2 rounded-full hover:bg-gray-800`}
+                  aria-label={link.label}
+                >
+                  <span className="text-2xl">{link.icon}</span>
+                </motion.a>
+              ))}
             </div>
           </motion.div>
         </div>
-      </motion.div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-gray-400 mb-4 md:mb-0"
+            >
+              © {new Date().getFullYear()} Suryansh Singh. All rights reserved.
+            </motion.div>
+            
+            <div className="flex space-x-6">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 };
