@@ -10,12 +10,7 @@ const Footer = () => {
     { icon: <FaEnvelope />, url: 'mailto:your.email@example.com', label: 'Email', color: 'hover:text-red-400' }
   ];
 
-  const footerLinks = [
-    { name: 'Home', path: '#home' },
-    { name: 'About', path: '#about' },
-    { name: 'Projects', path: '#projects' },
-    { name: 'Contact', path: '#contact' }
-  ];
+
 
   return (
     <footer className="bg-black border-t border-gray-800">
@@ -35,27 +30,7 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-4"
-          >
-            <h3 className="text-xl font-bold text-white">Quick Links</h3>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.path}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+
 
           {/* Contact Info */}
           <motion.div

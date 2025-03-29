@@ -30,10 +30,9 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+    <section id="contact" className="min-h-screen py-20 px-4 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-50" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]" />
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">

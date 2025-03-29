@@ -11,6 +11,7 @@ import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import WelcomeBanner from '../components/WelcomeBanner';
 
 const Home = () => {
   const [showAnimation, setShowAnimation] = useState(false);
@@ -32,13 +33,7 @@ const Home = () => {
     { icon: <FaTwitter />, url: 'https://twitter.com/yourusername', label: 'Twitter' }
   ];
 
-  const handleScrollClick = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+  
   return (
     <>
       <Header />
@@ -173,10 +168,10 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.button 
+        <motion.a
+          href="#about"
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group outline-none focus:outline-none focus:ring-0 border-0"
           style={{ opacity }}
-          onClick={handleScrollClick}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -194,93 +189,21 @@ const Home = () => {
           <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-white/50 text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
             Scroll to About
           </span>
-        </motion.button>
+        </motion.a>
       </div>
 
-      {/* Welcome Banner */}
-      <div className='about h-[15vh] w-full bg-black z-10 overflow-hidden relative'>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20" />
-        <div
-          className='flex items-center font-bold whitespace-nowrap p-8 relative'
-          style={{
-            animation: 'marquee 20s linear infinite',
-          }}
-        >
-          {[...Array(8)].map((_, i) => (
-            <React.Fragment key={i}>
-              <p className='mr-5 text-4xl text-white'>WELCOME TO MY PORTFOLIO </p>
-              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
-              <p className='mr-5 text-4xl text-white'>LET ME INTRODUCE MYSELF</p>
-              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
-            </React.Fragment>
-          ))}
-        </div>
-        <style jsx>{`
-          @keyframes marquee {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(0%); }
-          }
-        `}</style>
-      </div>
+     <WelcomeBanner title="WELCOME TO MY PORTFOLIO" subtitle="LET ME INTRODUCE MYSELF"/>
+
 
       {/* About Section */}
       <About />
 
-       {/* Welcome Banner */}
-       <div className='about h-[15vh] w-full bg-black z-10 overflow-hidden relative'>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20" />
-        <div
-          className='flex items-center font-bold whitespace-nowrap p-8 relative'
-          style={{
-            animation: 'marquee 20s linear infinite',
-          }}
-        >
-          {[...Array(8)].map((_, i) => (
-            <React.Fragment key={i}>
-              <p className='mr-5 text-4xl text-white'>WELCOME TO MY PORTFOLIO </p>
-              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
-              <p className='mr-5 text-4xl text-white'>LET ME INTRODUCE MYSELF</p>
-              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
-            </React.Fragment>
-          ))}
-        </div>
-        <style jsx>{`
-          @keyframes marquee {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(0%); }
-          }
-        `}</style>
-      </div>
-
+      <WelcomeBanner title="SHOWCASE MY WORK" subtitle="EXPLORE MY PROJECTS"/>
 
       {/* Projects Section */}
       <Projects />
 
-       {/* Welcome Banner */}
-       <div className='about h-[15vh] w-full bg-black z-10 overflow-hidden relative'>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20" />
-        <div
-          className='flex items-center font-bold whitespace-nowrap p-8 relative'
-          style={{
-            animation: 'marquee 20s linear infinite',
-          }}
-        >
-          {[...Array(8)].map((_, i) => (
-            <React.Fragment key={i}>
-              <p className='mr-5 text-4xl text-white'>WELCOME TO MY PORTFOLIO </p>
-              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
-              <p className='mr-5 text-4xl text-white'>LET ME INTRODUCE MYSELF</p>
-              <img src={animationLogo} alt="logo" className='w-[4%] mr-5 animate-pulse' />
-            </React.Fragment>
-          ))}
-        </div>
-        <style jsx>{`
-          @keyframes marquee {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(0%); }
-          }
-        `}</style>
-      </div>
+     <WelcomeBanner title="HAVE A QUESTION?" subtitle="GET IN TOUCH"/>
 
 
       {/* Contact Section */}

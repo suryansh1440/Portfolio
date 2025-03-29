@@ -136,6 +136,7 @@ const Projects = () => {
   return (
     <section
       ref={containerRef}
+      id="projects"
       className="min-h-screen bg-black text-white relative overflow-hidden"
     >
       {/* Background Canvas */}
