@@ -36,7 +36,7 @@ const Home = () => {
       <Header />
       
       {/* Hero Section */}
-      <div id="home" className='flex flex-col bg-black h-[100vh] lg:h-screen w-full overflow-hidden relative'>
+      <div id="home" className='flex flex-col bg-black h-[80vh] lg:h-screen w-full overflow-hidden relative'>
         {/* Background Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-50" />
         
