@@ -35,11 +35,11 @@ const Contact = () => {
     try {
       // Send email using EmailJS
       const result = await emailjs.send(
-        'service_bt497p6',
-        'template_xrcvdga', 
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 
         Templates, 
         {
-          publicKey: 'C6F0vjxXkp0ZmjA2w',
+          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
         }
       );
       
