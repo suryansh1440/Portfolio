@@ -16,7 +16,6 @@ import WelcomeBanner from '../components/WelcomeBanner';
 const Home = () => {
   const [showAnimation, setShowAnimation] = useState(false);
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 300], [0, 100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   useEffect(() => {
@@ -33,42 +32,17 @@ const Home = () => {
     { icon: <FaTwitter />, url: 'https://twitter.com/yourusername', label: 'Twitter' }
   ];
 
-  
   return (
     <>
       <Header />
       
       {/* Hero Section */}
-      <div id="home" className='flex flex-col bg-black min-h-[100vh] w-full overflow-hidden relative'>
+      <div id="home" className='flex flex-col bg-black h-[110vh] lg:h-screen w-full overflow-hidden relative'>
         {/* Background Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-50" />
         
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/10 rounded-full"
-              initial={{ 
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                scale: 0
-              }}
-              animate={{ 
-                scale: [0, 1, 0],
-                opacity: [0, 1, 0]
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="absolute w-full h-full lg:flex-row flex-col flex justify-center items-center">
-          <div className='h-full lg:w-[65%] w-full ml-5 flex item-center justify-center text-white font-bold text-4xl flex-col lg:mt-0 mt-50 lg:p-10'>
+        <div className="absolute w-full h-full flex flex-col lg:flex-row justify-center items-center">
+          <div className='h-full lg:w-[65%] w-full flex item-center justify-center text-white font-bold text-4xl flex-col lg:mt-0 mt-10 lg:p-10 p-6'>
             <motion.h1 
               className='lg:text-6xl text-4xl font-bold text-white'
               initial={{ opacity: 0, y: 20 }}
@@ -91,12 +65,13 @@ const Home = () => {
                 animateOn="view"
                 speed={400}
                 revealDirection="start"
-                className='text-sliver-500'
+                className='text-silver-500'
               />
             </motion.div>
+
             {showAnimation && (
               <motion.div
-                className='mt-10 lg:text-6xl text-xl font-bold text-white'
+                className='mt-10 lg:text-6xl text-2xl font-bold text-white'
                 style={{ fontFamily: 'Space Mono, monospace' }}
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -120,7 +95,7 @@ const Home = () => {
 
             {/* Social Links */}
             <motion.div 
-              className="flex gap-6 mt-8"
+              className="lg:flex gap-6 mt-8 hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -143,20 +118,21 @@ const Home = () => {
               ))}
             </motion.div>
           </div>
+
           <motion.div
-            className='h-full lg:w-[35%] w-[100%] flex items-center justify-left'
-            initial={{ x: 200, opacity: 1 }}
-            animate={{ x: 0, opacity: 1 }}
+            className='h-full lg:w-[35%]  w-full flex items-center justify-center'
+            initial={window.innerWidth > 768 ? { x: 200, opacity: 1 } : { y: 200, opacity: 1 }}
+            animate={window.innerWidth > 768 ? { x: 0, opacity: 1 } : { y: 0, opacity: 1 }}
             transition={{ duration: 2 }}
           >
             <TiltedCard
               imageSrc={MainPhoto}
               altText="Surya Photo"
               captionText="Admin"
-              containerHeight="400px"
-              containerWidth="400px"
-              imageHeight="400px"
-              imageWidth="400px"
+              containerHeight={window.innerWidth > 768 ? "400px" : "280px"}
+              containerWidth={window.innerWidth > 768 ? "400px" : "280px"}
+              imageHeight={window.innerWidth > 768 ? "400px" : "280px"}
+              imageWidth={window.innerWidth > 768 ? "400px" : "280px"}
               rotateAmplitude={13}
               scaleOnHover={1.3}
               showMobileWarning={false}
@@ -170,7 +146,7 @@ const Home = () => {
         {/* Scroll Indicator */}
         <a
           href="#about"
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group z-60"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group z-60 lg:block hidden"
           style={{ opacity }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -189,24 +165,12 @@ const Home = () => {
         </a>
       </div>
 
-     <WelcomeBanner title="WELCOME TO MY PORTFOLIO" subtitle="LET ME INTRODUCE MYSELF"/>
-
-
-      {/* About Section */}
+      <WelcomeBanner title="WELCOME TO MY PORTFOLIO" subtitle="LET ME INTRODUCE MYSELF"/>
       <About />
-
       <WelcomeBanner title="SHOWCASE MY WORK" subtitle="EXPLORE MY PROJECTS"/>
-
-      {/* Projects Section */}
       <Projects />
-
-     <WelcomeBanner title="HAVE A QUESTION?" subtitle="GET IN TOUCH"/>
-
-
-      {/* Contact Section */}
+      <WelcomeBanner title="HAVE A QUESTION?" subtitle="GET IN TOUCH"/>
       <Contact />
-
-      {/* Footer */}
       <Footer />
     </>
   );
