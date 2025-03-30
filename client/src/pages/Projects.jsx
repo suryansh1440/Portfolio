@@ -7,7 +7,7 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import sc1 from '../assets/sc1.png';
 import sc2 from '../assets/sc2.png';
 import sc3 from '../assets/sc3.png';
-import StarryBackground from '../components/StarryBackground';
+import StarryBackground from '../component/StarryBackground';
 
 // Sample project data - replace with your actual projects
 const projects = [

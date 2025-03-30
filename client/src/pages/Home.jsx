@@ -11,7 +11,7 @@ import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import WelcomeBanner from '../components/WelcomeBanner';
+import WelcomeBanner from '../component/WelcomeBanner';
 
 const Home = () => {
   const [showAnimation, setShowAnimation] = useState(false);
