@@ -36,7 +36,7 @@ const Home = () => {
       <Header />
       
       {/* Hero Section */}
-      <div id="home" className='flex flex-col bg-black h-[110vh] lg:h-screen w-full overflow-hidden relative'>
+      <div id="home" className='flex flex-col bg-black h-[100vh] lg:h-screen w-full overflow-hidden relative'>
         {/* Background Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-50" />
         
@@ -70,7 +70,7 @@ const Home = () => {
 
             {showAnimation && (
               <motion.div
-                className='mt-10 lg:text-6xl text-2xl font-bold text-white'
+                className='mt-10 lg:text-6xl text-xl font-bold text-white'
                 style={{ fontFamily: 'Space Mono, monospace' }}
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

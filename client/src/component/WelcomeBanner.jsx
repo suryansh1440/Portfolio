@@ -7,7 +7,7 @@ const WelcomeBanner = ({title, subtitle}) => {
        <div className='about lg:h-[15vh] h-[10vh] w-full bg-black z-10 overflow-hidden relative lg:my-0 my-2'>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20" />
         <div
-          className='flex items-center font-bold whitespace-nowrap lg:p-8 p-2 relative'
+          className='flex items-center font-bold whitespace-nowrap lg:p-8 pt-3 relative'
           style={
             {
               animation: 'marquee 20s linear infinite',
