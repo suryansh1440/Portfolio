@@ -7,40 +7,62 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import sc1 from '../assets/sc1.png';
 import sc2 from '../assets/sc2.png';
 import sc3 from '../assets/sc3.png';
+import sc4 from '../assets/sc4.png';
+import sc5 from '../assets/sc5.png';
 import StarryBackground from '../component/StarryBackground';
 
 // Sample project data - replace with your actual projects
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce platform with React, Node.js, and MongoDB",
+    title: "Kid Tutor",
+    description: "A full-stack Educational Platform for Kids where they can learn and play games by quiz",
     image: sc1,
     technologies: ["React", "Node.js", "MongoDB", "Express"],
-    github: "https://github.com/yourusername/ecommerce",
-    live: "https://ecommerce-demo.com",
+    github: "https://github.com/suryansh1440/Kid-tutor",
+    live: "https://kid-tutor-5etq.vercel.app",
     color: "#FF6B6B"
   },
   {
     id: 2,
-    title: "AI Image Generator",
-    description: "An AI-powered image generation tool using DALL-E API",
+    title: "Real Time Process Monitoring",
+    description: "A Real Time Process Monitoring System for monitoring the process of a machine",
     image: sc2,
-    technologies: ["React", "OpenAI", "TailwindCSS", "Node.js"],
-    github: "https://github.com/yourusername/ai-generator",
-    live: "https://ai-generator-demo.com",
+    technologies: ["React", "Socket.io", "TailwindCSS", "Node.js","Express"],
+    github: "https://github.com/suryansh1440/RealTime_ProcessMonitoring",
+    live: "",
     color: "#4ECDC4"
   },
   {
     id: 3,
-    title: "Social Media Dashboard",
-    description: "Real-time social media analytics dashboard",
+    title: "Ai Grant Writer",
+    description: "A AI Grant Writer for writing grant for startup using Gemini api",
     image: sc3,
-    technologies: ["React", "Firebase", "D3.js", "TailwindCSS"],
-    github: "https://github.com/yourusername/dashboard",
-    live: "https://dashboard-demo.com",
+    technologies: ["React", "Node.js", "Gemini api", "TailwindCSS"],
+    github: "https://github.com/suryansh1440/AiGrantWriter",
+    live: "",
     color: "#45B7D1"
-  }
+  },
+  {
+  id: 4,
+  title: "Task Reminder",
+  description: "A Task Reminder for reminding the user to do the task. You can add task, edit task, delete task and also set reminder for the task",
+  image: sc4,
+  technologies: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
+  github: "https://github.com/suryansh1440/Task_Reminder",
+  live: "",
+  color: "#45B7D1"
+},{
+  id: 5,
+  title: "Carbon Emmsion Tracker",
+  description: "A Carbon Emmsion Tracker for tracking the carbon emmsion of the user. You can add carbon emmsion, edit carbon emmsion, delete carbon emmsion and also set reminder for the carbon emmsion",
+  image: sc5,
+  technologies: ["Express", "MongoDB", "React", "Three fiver", "Node.js"],
+  github: "https://github.com/suryansh1440/Carbon-Emmsion-Tracker",
+  live: "",
+  color: "#45B7D1"
+}
+
 ];
 
 // 3D Scene Components
@@ -150,8 +172,6 @@ const Projects = () => {
 
       <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-50" />
 
-
-
       {/* Content Container */}
       <div className="container mx-auto px-4 py-20 relative z-10">
         <motion.h1
@@ -163,10 +183,8 @@ const Projects = () => {
           Featured Projects
         </motion.h1>
 
-
-
         {/* Project Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}

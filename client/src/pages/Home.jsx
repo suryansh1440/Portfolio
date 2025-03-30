@@ -10,7 +10,7 @@ import animationLogo from '../assets/animationLogo.png';
 import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaLinkedin} from 'react-icons/fa';
 import WelcomeBanner from '../component/WelcomeBanner';
 
 const Home = () => {
@@ -27,9 +27,9 @@ const Home = () => {
   }, []);
 
   const socialLinks = [
-    { icon: <FaGithub />, url: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/yourusername', label: 'LinkedIn' },
-    { icon: <FaTwitter />, url: 'https://twitter.com/yourusername', label: 'Twitter' }
+    { icon: <FaGithub />, url: 'https://github.com/suryansh1440', label: 'GitHub' },
+    { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/suryansh-singh-/', label: 'LinkedIn' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/surya_nsh_14/', label: 'Instagram' }
   ];
 
   return (
@@ -95,7 +95,7 @@ const Home = () => {
 
             {/* Social Links */}
             <motion.div 
-              className="lg:flex gap-6 mt-8 hidden"
+              className="lg:flex gap-6 mt-8 hidden z-60"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -144,7 +144,7 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <a
+        <motion.a
           href="#about"
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group z-60 lg:block hidden"
           style={{ opacity }}
@@ -162,7 +162,7 @@ const Home = () => {
               className="w-1.5 h-1.5 bg-white/50 rounded-full mx-auto group-hover:bg-white/70 transition-colors"
             />
           </motion.div>
-        </a>
+        </motion.a>
       </div>
 
       <WelcomeBanner title="WELCOME TO MY PORTFOLIO" subtitle="LET ME INTRODUCE MYSELF"/>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaPaperPlane, FaUser, FaEnvelope as FaEnvelopeIcon } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaPaperPlane, FaUser, FaEnvelope as FaEnvelopeIcon } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
+import { toast } from 'react-toastify';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,11 +10,63 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  
+  const [loading, setLoading] = useState(false);
+  
+  const Templates = {
+    name: formData.name,
+    email: formData.email,
+    time: new Date().toLocaleString(),
+    message: formData.message
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    
+    // Form validation
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error('Please fill all required fields');
+      return;
+    }
+    
+    // Set loading state
+    setLoading(true);
+    
+    try {
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        'service_bt497p6',
+        'template_xrcvdga', 
+        Templates, 
+        {
+          publicKey: 'C6F0vjxXkp0ZmjA2w',
+        }
+      );
+      
+      // Handle success
+      console.log('Email sent successfully!', result);
+      toast.success('Message sent successfully! We will get back to you soon.');
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      
+    } catch (error) {
+      // Handle specific EmailJS errors
+      console.error('FAILED...', error);
+      
+      if (error.status === 412) {
+        toast.error('Email service configuration issue. Please try an alternative contact method.');
+      } else {
+        toast.error('Failed to send message. Please try again later.');
+      }
+    } finally {
+      // Reset loading state
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -23,10 +77,10 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: <FaGithub />, url: 'https://github.com/yourusername', label: 'GitHub', color: 'hover:text-gray-400' },
-    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/yourusername', label: 'LinkedIn', color: 'hover:text-blue-500' },
-    { icon: <FaTwitter />, url: 'https://twitter.com/yourusername', label: 'Twitter', color: 'hover:text-blue-400' },
-    { icon: <FaEnvelope />, url: 'mailto:your.email@example.com', label: 'Email', color: 'hover:text-red-400' }
+    { icon: <FaGithub />, url: 'https://github.com/suryansh1440', label: 'GitHub', color: 'hover:text-gray-400' },
+    { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/suryansh-singh-', label: 'LinkedIn', color: 'hover:text-blue-500' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/surya_nsh_14/', label: 'Instagram', color: 'hover:text-red-400' },
+    { icon: <FaEnvelope />, url: 'mailto:suryansh1440@gmail.com', label: 'Email', color: 'hover:text-red-400' }
   ];
 
   return (
@@ -80,6 +134,7 @@ const Contact = () => {
                     className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm transition-all"
                     placeholder="Your name"
                     required
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -99,6 +154,7 @@ const Contact = () => {
                     className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm transition-all"
                     placeholder="your.email@example.com"
                     required
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -114,6 +170,7 @@ const Contact = () => {
                   className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm transition-all resize-none"
                   placeholder="Your message..."
                   required
+                  disabled={loading}
                 ></textarea>
               </div>
 
@@ -121,10 +178,17 @@ const Contact = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
+                disabled={loading}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center justify-center gap-2 group"
               >
-                <span>Send Message</span>
-                <FaPaperPlane className="group-hover:translate-x-1 transition-transform" />
+                <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                {!loading && <FaPaperPlane className="group-hover:translate-x-1 transition-transform" />}
+                {loading && (
+                  <svg className="animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                )}
               </motion.button>
             </form>
           </motion.div>

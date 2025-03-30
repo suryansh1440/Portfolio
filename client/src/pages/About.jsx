@@ -5,13 +5,13 @@ import { SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiAdobeaftereffe
 import { MdSchool, MdWork, MdInterests } from 'react-icons/md';
 
 const skills = [
-  { name: 'React', icon: <FaReact />, level: 90, color: '#61DAFB' },
+  { name: 'React', icon: <FaReact />, level: 95, color: '#61DAFB' },
   { name: 'Node.js', icon: <FaNodeJs />, level: 85, color: '#339933' },
   { name: 'JavaScript', icon: <FaJs />, level: 90, color: '#F7DF1E' },
-  { name: 'HTML5', icon: <FaHtml5 />, level: 95, color: '#E34F26' },
+  { name: 'HTML5', icon: <FaHtml5 />, level: 100, color: '#E34F26' },
   { name: 'CSS3', icon: <FaCss3Alt />, level: 90, color: '#1572B6' },
-  { name: 'Database', icon: <FaDatabase />, level: 80, color: '#336791' },
-  { name: 'Git', icon: <FaGitAlt />, level: 85, color: '#F05032' }
+  { name: 'MongoDB', icon: <FaDatabase />, level: 95, color: '#336791' },
+  { name: 'Git', icon: <FaGitAlt />, level: 70, color: '#F05032' }
 ];
 
 const designTools = [
@@ -23,7 +23,7 @@ const designTools = [
   { name: 'Figma', icon: <SiFigma />, color: '#F24E1E' }
 ];
 
-const interests = ['Photography', 'Traveling', 'Art', 'Music', 'Movie'];
+const interests = ['Fitness', 'Traveling', 'E-sport', 'Music', 'Movie'];
 
 const About = () => {
   return (
@@ -79,9 +79,9 @@ const About = () => {
                 <h3>Education</h3>
               </div>
               <div className="ml-9 space-y-2">
-                <p className="text-lg font-medium">Computer Science Engineering</p>
-                <p className="text-gray-400">2022 - Present</p>
-                <p className="text-gray-400">GPA: 8.5/10</p>
+                <p className="text-lg font-medium">Lovely Professional University (LPU)</p>
+                <p className="text-gray-400">2023 - Present</p>
+                <p className="text-gray-400">CGPA: 8.3/10</p>
               </div>
             </motion.div>
 
@@ -123,7 +123,7 @@ const About = () => {
             {/* Development Skills */}
             <div className="space-y-6">
               <motion.h2
-                className='text-2xl font-bold'
+                className='text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text'
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
@@ -138,19 +138,44 @@ const About = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="group"
+                    className="group hover:bg-gray-900/30 p-2 rounded-lg transition-all duration-300 border-l-2 border-transparent hover:border-l-2 hover:border-l-[color:var(--skill-color)]"
+                    style={{ "--skill-color": skill.color }}
                   >
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl" style={{ color: skill.color }}>{skill.icon}</span>
-                        <span className="text-lg group-hover:text-pink-500 transition-colors">{skill.name}</span>
+                        <motion.span 
+                          className="text-2xl" 
+                          style={{ color: skill.color }}
+                          whileHover={{ scale: 1.2 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {skill.icon}
+                        </motion.span>
+                        <span className="text-base font-medium group-hover:text-[color:var(--skill-color)] transition-colors">{skill.name}</span>
                       </div>
-                      <span className="text-gray-400">{skill.level}%</span>
+                      <div className="flex items-center gap-2">
+                        <div className="bg-gray-800/60 h-[4px] w-[40px] rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full rounded-full"
+                            style={{ 
+                              backgroundColor: skill.color,
+                              boxShadow: `0 0 6px ${skill.color}` 
+                            }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '100%' }}
+                            transition={{ duration: 0.8, delay: index * 0.1 }}
+                          />
+                        </div>
+                        <span className="text-xs text-gray-400 group-hover:text-white transition-colors">{skill.level}%</span>
+                      </div>
                     </div>
-                    <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-gray-800/60 rounded-full overflow-hidden backdrop-blur-sm">
                       <motion.div
-                        className="h-full"
-                        style={{ backgroundColor: skill.color }}
+                        className="h-full rounded-full"
+                        style={{ 
+                          backgroundColor: skill.color,
+                          boxShadow: `0 0 8px ${skill.color}` 
+                        }}
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         transition={{ duration: 1, delay: index * 0.1 }}
