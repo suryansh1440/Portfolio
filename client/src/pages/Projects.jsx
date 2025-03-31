@@ -54,7 +54,7 @@ const projects = [
 },{
   id: 5,
   title: "Carbon Emmsion Tracker",
-  description: "A Carbon Emmsion Tracker for tracking the carbon emmsion of the user. You can add carbon emmsion, edit carbon emmsion, delete carbon emmsion and also set reminder for the carbon emmsion",
+  description: "A Carbon Emmsion Tracker for tracking the carbon emmsion of the user.",
   image: sc5,
   technologies: ["Express", "MongoDB", "React", "Three fiver", "Node.js"],
   github: "https://github.com/suryansh1440/Carbon-Emmsion-Tracker",

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
-import TiltedCard from '../ReactsBits/TiltedCard';
 import DecryptedText from '../ReactsBits/DecryptedText';
 import { TypeAnimation } from 'react-type-animation';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -119,26 +118,49 @@ const Home = () => {
           </div>
 
           <motion.div
-            className='h-full lg:w-[35%]  w-full flex items-center justify-center'
-            initial={window.innerWidth > 768 ? { x: 200, opacity: 1 } : { y: 200, opacity: 1 }}
-            animate={window.innerWidth > 768 ? { x: 0, opacity: 1 } : { y: 0, opacity: 1 }}
-            transition={{ duration: 2 }}
+            className='h-full lg:w-[35%] w-full flex items-center justify-center'
+            initial={{ scale: 0.6 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
           >
-            <TiltedCard
-              imageSrc={MainPhoto}
-              altText="Surya Photo"
-              captionText="Admin"
-              containerHeight={window.innerWidth > 768 ? "400px" : "280px"}
-              containerWidth={window.innerWidth > 768 ? "400px" : "280px"}
-              imageHeight={window.innerWidth > 768 ? "400px" : "280px"}
-              imageWidth={window.innerWidth > 768 ? "400px" : "280px"}
-              rotateAmplitude={13}
-              scaleOnHover={1.3}
-              showMobileWarning={false}
-              showTooltip={true}
-              displayOverlayContent={true}
-              overlayContent={null}
-            />
+            <motion.div
+              className="relative"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              {/* Subtle outer glow */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 rounded-full blur-md" />
+              
+              {/* Main container with double border effect */}
+              <div className="relative rounded-full p-1 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10">
+                <div className="rounded-full p-1 bg-black">
+                  {/* Image container */}
+                  <motion.div
+                    className="relative rounded-full overflow-hidden"
+                    style={{
+                      width: window.innerWidth > 768 ? "380px" : "260px",
+                      height: window.innerWidth > 768 ? "380px" : "260px",
+                    }}
+                  >
+                    {/* Animated gradient border */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 animate-[gradient_3s_ease-in-out_infinite]" />
+                    
+                    {/* Image */}
+                    <motion.img
+                      src={MainPhoto}
+                      alt="Surya Photo"
+                      className="relative w-full h-full object-cover rounded-full"
+                      initial={{ scale: 1.2, filter: 'brightness(0.8)' }}
+                      animate={{ scale: 1, filter: 'brightness(1)' }}
+                      transition={{ duration: 0.8, ease: "easeOut" }}
+                    />
+                    
+                    {/* Subtle overlay for depth */}
+                    <div className="absolute inset-0 rounded-full shadow-inner bg-gradient-to-b from-black/10 via-transparent to-black/20" />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 

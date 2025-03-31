@@ -16,17 +16,15 @@ export default {
         'error': '#FF5630',
       },
       animation: {
-        'gradient': 'gradient 8s linear infinite',
+        'gradient': 'gradient 3s ease-in-out infinite',
       },
       keyframes: {
         gradient: {
           '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
+            'background-position': '0% 50%',
           },
           '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
+            'background-position': '100% 50%',
           },
         },
       },
