@@ -1,12 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import { Environment, Float, PerspectiveCamera } from '@react-three/drei';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import sc1 from '../assets/sc1.png';
 import sc2 from '../assets/sc2.png';
 import sc3 from '../assets/sc3.png';
 import sc4 from '../assets/sc4.png';
 import sc5 from '../assets/sc5.png';
+import StarryBackground from '../component/StarryBackground';
 
 const projects = [
   {
@@ -51,7 +54,7 @@ const projects = [
 },{
   id: 5,
   title: "Carbon Emmsion Tracker",
-  description: "A Carbon Emmsion Tracker for tracking the carbon emmsion of the user.",
+  description: "A Carbon Emmsion Tracker for tracking the carbon emmsion of the user. You can add carbon emmsion, edit carbon emmsion, delete carbon emmsion and also set reminder for the carbon emmsion",
   image: sc5,
   technologies: ["Express", "MongoDB", "React", "Three fiver", "Node.js"],
   github: "https://github.com/suryansh1440/Carbon-Emmsion-Tracker",
@@ -61,55 +64,85 @@ const projects = [
 
 ];
 
-const ProjectCard = ({ project }) => {
+
+const ProjectCard = ({ project, index, isInView }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const ref = useRef(null);
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1 },
+  };
+
   return (
     <motion.div
-      className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      ref={ref}
+      variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative group h-[400px]"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="relative h-48 mb-4 overflow-hidden rounded-lg">
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-        />
-      </div>
-      <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-      <p className="text-gray-400 mb-4">{project.description}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.technologies.map((tech, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 text-sm bg-gray-800 text-gray-300 rounded-full"
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-lg rounded-3xl p-0.5 shadow-2xl">
+        <div className="relative h-full bg-gradient-to-br from-gray-900 to-black rounded-3xl p-6 overflow-hidden">
+          <div className="relative h-48 mb-4 overflow-hidden rounded-xl">
+            <motion.img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover"
+              animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+              transition={{ duration: 0.4 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          </div>
+
+          <motion.div
+            className="absolute bottom-6 left-6 right-6"
+            animate={isHovered ? { y: -10 } : { y: 0 }}
           >
-            {tech}
-          </span>
-        ))}
-      </div>
-      <div className="flex gap-4">
-        {project.github && (
-          <motion.a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-            whileHover={{ scale: 1.05 }}
-          >
-            <FaGithub /> GitHub
-          </motion.a>
-        )}
-        {project.live && (
-          <motion.a
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-            whileHover={{ scale: 1.05 }}
-          >
-            <FaExternalLinkAlt /> Live Demo
-          </motion.a>
-        )}
+            <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+            <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+              {project.description}
+            </p>
+            
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.technologies.map((tech, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1 bg-white/5 rounded-full text-xs font-medium backdrop-blur-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex gap-3 transition-all">
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-all hover:scale-105"
+                >
+                  <FaGithub className="w-4 h-4" />
+                  <span className="text-sm">Code</span>
+                </a>
+              )}
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 rounded-lg transition-all hover:scale-105"
+                >
+                  <FaExternalLinkAlt className="w-4 h-4" />
+                  <span className="text-sm">Live Demo</span>
+                </a>
+              )}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );
@@ -125,9 +158,17 @@ const Projects = () => {
     <section
       ref={ref}
       id="projects"
-      className="relative min-h-screen bg-black py-20 px-4"
+      className="relative min-h-screen overflow-hidden bg-black"
     >
-      <div className="container mx-auto max-w-7xl">
+  <div className="fixed inset-0 z-0">
+        <Canvas>
+          <StarryBackground />
+          <Environment preset="night" />
+          <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+        </Canvas>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-20">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -137,8 +178,13 @@ const Projects = () => {
         </motion.h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              isInView={isInView}
+            />
           ))}
         </div>
 
