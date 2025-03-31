@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiDownload } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
 const Header = () => {
@@ -65,11 +65,11 @@ const Header = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 ">
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <motion.div
                 key={item.name}
-                className="relative group "
+                className="relative group"
                 whileHover={{ scale: 1.1 }}
               >
                 <a
@@ -88,6 +88,18 @@ const Header = () => {
                 </a>
               </motion.div>
             ))}
+            
+            {/* CV Download Button */}
+            <motion.a
+              href="/Suryansh_Singh_CV.pdf"
+              download
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/40 hover:to-purple-500/40 border border-blue-500/30 rounded-xl text-white font-medium text-sm transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FiDownload className="w-4 h-4" />
+              <span>CV</span>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -129,6 +141,21 @@ const Header = () => {
                       </div>
                     </motion.a>
                   ))}
+                  
+                  {/* Mobile CV Download Button */}
+                  <motion.a
+                    href="/Suryansh_Singh_CV.pdf"
+                    download
+                    className="flex items-center gap-2 px-4 py-3 mt-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg text-white font-medium"
+                    whileHover={{ 
+                      x: 10,
+                      transition: { type: 'spring', stiffness: 300 }
+                    }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <FiDownload className="w-4 h-4" />
+                    <span>Download CV</span>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
