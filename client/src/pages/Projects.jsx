@@ -9,9 +9,31 @@ import sc2 from '../assets/sc2.png';
 import sc3 from '../assets/sc3.png';
 import sc4 from '../assets/sc4.png';
 import sc5 from '../assets/sc5.png';
+import sc6 from '../assets/sc6.png';
+import sc7 from '../assets/sc7.png';
 import StarryBackground from '../component/StarryBackground';
 
 const projects = [
+  {
+    id: 6,
+    title: "Ai Interviewer",
+    description: "A ai interview platform with real time voice interaction and github ,leetcode and resume analysis .",
+    image: sc6,
+    technologies: ["Express", "MongoDB", "React", "Gemini", "Node.js"],
+    github: "https://github.com/suryansh1440/AiInterviewer",
+    live: "https://aiinterviewer-k0xg.onrender.com/",
+    color: "#45B7D1"
+  },
+  {
+    id: 7,
+    title: "Chatty",
+    description: "A Real time chat app.",
+    image: sc7,
+    technologies: ["Express", "MongoDB", "React", "Socket io", "Node.js"],
+    github: "https://github.com/suryansh1440/RealTimeChatApp",
+    live: "https://realtimechatapp-yuh7.onrender.com/",
+    color: "#45B7D1"
+  },
   {
     id: 1,
     title: "Kid Tutor",
@@ -39,7 +61,7 @@ const projects = [
     image: sc3,
     technologies: ["React", "Node.js", "Gemini api", "TailwindCSS"],
     github: "https://github.com/suryansh1440/AiGrantWriter",
-    live: "",
+    live: "https://ai-grant-writer-green.vercel.app",
     color: "#45B7D1"
   },
   {
@@ -51,7 +73,8 @@ const projects = [
   github: "https://github.com/suryansh1440/Task_Reminder",
   live: "",
   color: "#45B7D1"
-},{
+},
+{
   id: 5,
   title: "Carbon Emmsion Tracker",
   description: "A Carbon Emmsion Tracker for tracking the carbon emmsion of the user.",
