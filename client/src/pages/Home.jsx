@@ -77,11 +77,11 @@ const Home = () => {
               >
                 <TypeAnimation
                   sequence={[
-                    'I Am Frontend Developer',
+                    'I Am a Frontend Developer',
                     1000,
-                    'I Am Backend Developer',
+                    'I Am a Backend Developer',
                     1000,
-                    'I Am UI/UX Designer',
+                    'I Am a UI/UX Designer',
                     1000,
                   ]}
                   speed={60}
